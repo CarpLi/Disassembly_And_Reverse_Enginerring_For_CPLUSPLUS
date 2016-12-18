@@ -6,15 +6,15 @@
 vftable - 虚函数表; vbtable - 虚继承的父类表; member - 类的成员变量
 ```
 ##总结一
-###继承方式：
+###继承方式：非virtual继承
 ```
-非virtual继承：导入各个父类的结构（按照父类声明的顺序，从上到下），自身member在最后
+导入各个父类的结构（按照父类声明的顺序，从上到下），自身member在最后
 重写virtual方法：更新该方法最早定义的类的vftable
 新的virtual方法：在最左父类的vftable增加
 ```
-###继承方式
+###继承方式：有virtual继承
 ```
-有virtual继承：在自身member后增加virtual父类的结构（按照子类继承的顺序从左到右），同时在最前面增加vbtable（如果没有的话），
+在自身member后增加virtual父类的结构（按照子类继承的顺序从左到右），同时在最前面增加vbtable（如果没有的话），
 增加一项指向父类结构
 重写virtual方法：更新该方法的最早定义的类的vftable
 新的virtual方法：在自身最前面增加vftable（如果没有的话），在自己的vftable增加
