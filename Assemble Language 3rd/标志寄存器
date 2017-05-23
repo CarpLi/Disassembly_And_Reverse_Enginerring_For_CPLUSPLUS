@@ -1,0 +1,43 @@
+; 编写一个子程序，将包含任意字符，以0结尾的字符串中的小写字母转为大写字母
+assume cs : codeseg
+
+dataseg segment
+	db "Beginner's All-purpose Symbolic Instruction Code.", 0
+dataseg ends
+
+codeseg segment
+
+start:
+	mov ax, dataseg
+	mov ds, ax
+	mov si, 0
+	call letterc
+	
+	mov ax, 4c00h
+	int 21h	
+	
+letterc:
+	cmp byte ptr ds:[si], 61h
+	jb s1	
+	cmp byte ptr ds:[si], 7ah
+	ja s1
+    sub byte ptr ds:[si], 20h 
+    jmp s2 
+    ;sub byte ptr ds:[si], 20h
+    ;inc si
+    ;jmp letterc	
+    
+s1 :
+	cmp byte ptr ds:[si], 0
+	je s3
+	
+s2 :
+	inc si
+	jmp letterc	
+	
+s3 : 
+	ret
+	
+codeseg ends
+
+end start
